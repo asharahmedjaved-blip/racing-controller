@@ -1,0 +1,25 @@
+<launch>
+	<arg name="world_path"   default="$(find racing)/resources/racing_world.yaml"/>
+	<arg name="update_rate" default="200.0"/>
+	<arg name="step_size" default="0.005"/>
+	<arg name="pub_debug_viz" default="true"/>
+	<arg name="viz_pub_rate" default="30.0"/>
+	<arg name="show_viz" default="true"/>
+	<arg name="sensor_topic" default="vehicle/lidar_measurements"/>
+	<arg name="actuator_topic" default="vehicle/actuator_commands"/>
+	arg name="position_topic" default="odometry/ground_truth"/>
+
+	<include file="$(find racing)/launch/flatland_simulation.launch">
+		<arg name="world_path"   default="$(find racing)/resources/racing_world.yaml"/>
+		<arg name="update_rate" default="200.0"/>
+		<arg name="step_size" default="0.005"/>
+		<arg name="pub_debug_viz" default="true"/>
+		<arg name="viz_pub_rate" default="30.0"/>
+		<arg name="show_viz" default="true"/>
+	</include>
+	<include file="$(find racing)/launch/racing_controller.launch">
+		<arg name="sensor_topic" default="vehicle/lidar_measurements"/>
+		<arg name="actuator_topic" default="vehicle/actuator_commands"/>
+		<arg name="position_topic" default="odometry/ground_truth"/>
+	</include>
+</launch>
